@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 16:34:01 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/10/31 14:59:32 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:07:39 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,22 @@ long	get_time(void)
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * (uint64_t)1000) + (time.tv_usec / 1000));
+	return (time.tv_sec * 1000000L + time.tv_usec);
 }
 
 void	print_actions(int id, char *str)
 {
-	pthread_mutex_lock(&philo()->print);
-	printf("%ld |\t %i is %s\n", get_time(), id, str);
-	pthread_mutex_unlock(&philo()->print);
+	pthread_mutex_lock(&philo()->print_mutex);
+	printf("%ldms | Philo: %i %s\n", 
+		((get_time() - philo()->start_time) / 1000), id, str);
+	pthread_mutex_unlock(&philo()->print_mutex);
 }
 
+void	sync_func(void)
+{
+	long	time;
+
+	time = philo()->start_time - get_time();
+	if (time > 0)
+		usleep(time);
+}
