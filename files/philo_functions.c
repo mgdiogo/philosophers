@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:38 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/10/31 17:06:32 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:08:04 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	allocate_philos(void)
 	philo()->forks = malloc(sizeof(pthread_mutex_t) * philo()->n_philos);
 	while (++i < philo()->n_philos)
 		pthread_mutex_init(&philo()->forks[i], 0);
-	pthread_mutex_init(&philo()->print, 0);
+	pthread_mutex_init(&philo()->print_mutex, 0);
+	pthread_mutex_init(&philo()->data_mutex, 0);
 	create_philos();
 }
 
@@ -37,17 +38,22 @@ void	create_philos(void)
 	while (++i < philo()->n_philos)
 	{
 		philo()->philos[i].philo_id = i;
-		philo()->philos[i].last_meal = get_time() - philo()->start_time;
+		philo()->philos[i].last_meal = get_time();
 		philo()->philos[i].n_times_eat = philo()->n_times_eat;
-		pthread_create(&philo()->philos[i].ph_thread, NULL, &philo_routine,
-			(void *)&philo()->philos[i]);
 	}
+	i = -1;
+	while (++i < philo()->n_philos)
+		pthread_create(&philo()->philos[i].ph_thread, 
+			NULL, &philo_routine, (void *)&philo()->philos[i]);
 }
 
 void	*philo_routine(void *arg)
 {
-	t_philo_data	*philo;
+	t_philo_data	*ph;
 
-	philo = (t_philo_data *)arg;
+	ph = (t_philo_data *)arg;
+	sync_func();
+	while (!ph_death(ph))
+		print_actions(ph->philo_id, "has said hello");
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/03 15:46:10 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:38:21 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void				allocate_philos(void);
 void				*philo_routine(void *arg);
 void				ph_eat(t_philo_data *ph);
 int					ph_death(t_philo_data *ph);
+void				ph_think(t_philo_data *ph);
 void				print_actions(int id, char *str);
 
 #endif
