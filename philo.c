@@ -6,11 +6,11 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:10 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/03 15:54:54 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/13 22:12:35 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "includes/philo.h"
 
 int	main(int argc, char **argv)
 {

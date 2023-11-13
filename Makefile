@@ -6,6 +6,7 @@ FLAGS	=	-Wall -Werror -Wextra -pthread
 
 SRC		=	philo.c files/aux_functions.c \
 			files/philo_functions.c files/philo_actions.c \
+			files/philo_aux.c
 
 OBJ		=	$(SRC:.c=.o)
 

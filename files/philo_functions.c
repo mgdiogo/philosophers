@@ -6,11 +6,11 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:38 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/03 17:08:04 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/13 22:28:26 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../includes/philo.h"
 
 void	create_philos(void);
 void	allocate_philos(void);
@@ -54,6 +54,11 @@ void	*philo_routine(void *arg)
 	ph = (t_philo_data *)arg;
 	sync_func();
 	while (!ph_death(ph))
-		print_actions(ph->philo_id, "has said hello");
+	{
+		printf("entrei aqui");
+		if (philo()->n_times_eat > 0 && ph->n_times_eat == philo()->n_times_eat)
+			break ;
+		eating_process(ph);
+	}
 	return (NULL);
 }
