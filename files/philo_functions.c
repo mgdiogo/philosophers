@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:38 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/13 22:28:26 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/14 00:07:06 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,16 @@ void	*philo_routine(void *arg)
 	t_philo_data	*ph;
 
 	ph = (t_philo_data *)arg;
+	if (philo()->n_philos == 1)
+	{
+		print_actions(ph->philo_id, " has taken a fork!");
+		usleep(philo()->time_death);
+		print_actions(ph->philo_id, " has died!");
+		return (NULL);
+	}
 	sync_func();
 	while (!ph_death(ph))
 	{
-		printf("entrei aqui");
 		if (philo()->n_times_eat > 0 && ph->n_times_eat == philo()->n_times_eat)
 			break ;
 		eating_process(ph);

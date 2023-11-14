@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/13 22:06:44 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/13 23:53:30 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	t_philo_data	*philos;
 }					t_philo;
 
+void				clean_up(void);
 void				sync_func(void);
 t_philo				*philo(void);
 long				get_time(void);

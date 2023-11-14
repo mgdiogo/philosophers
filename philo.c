@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:10 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/13 22:12:35 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/13 23:53:39 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("Error: you're either using too many args, or too few!\n");
+	clean_up();
 	return (0);
 }
