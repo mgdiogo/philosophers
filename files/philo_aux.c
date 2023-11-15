@@ -6,16 +6,16 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:22:09 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/14 18:04:03 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:28:10 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void				clean_up(void);
-void				death_loop(void);
-void				get_forks(t_philo_data *ph);
-void				eating_process(t_philo_data *ph);
+void	clean_up(void);
+void	death_loop(void);
+void	get_forks(t_philo_data *ph);
+void	eating_process(t_philo_data *ph);
 
 void	get_forks(t_philo_data *ph)
 {
@@ -23,13 +23,13 @@ void	get_forks(t_philo_data *ph)
 	{
 		pthread_mutex_lock(&philo()->forks[ph->philo_id]);
 		print_actions(ph->philo_id, "has taken a fork");
-		pthread_mutex_lock(&philo()->forks[(ph->philo_id + 1) 
+		pthread_mutex_lock(&philo()->forks[(ph->philo_id + 1)
 			% philo()->n_philos]);
 		print_actions(ph->philo_id, "has taken a fork");
 	}
 	else
 	{
-		pthread_mutex_lock(&philo()->forks[(ph->philo_id + 1) 
+		pthread_mutex_lock(&philo()->forks[(ph->philo_id + 1)
 			% philo()->n_philos]);
 		print_actions(ph->philo_id, "has taken a fork");
 		pthread_mutex_lock(&philo()->forks[ph->philo_id]);
@@ -66,6 +66,7 @@ void	death_loop(void)
 {
 	int	i;
 
+	sync_func();
 	i = 0;
 	while (1)
 	{
