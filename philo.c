@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:10 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/13 23:53:39 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:45:18 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	main(int argc, char **argv)
 		philo()->start_time = get_time() + (philo()->n_philos * 2);
 		if (argc == 6)
 			philo()->n_times_eat = ft_atoi(argv[5]);
-		allocate_philos();
+		if (philo()->time_death < 0 || philo()->time_eat < 0 
+			|| philo()->time_sleep < 0)
+			return (printf("%s", INVALID_ATOI));
+		else
+			allocate_philos();
 	}
 	else
 		printf("Error: you're either using too many args, or too few!\n");

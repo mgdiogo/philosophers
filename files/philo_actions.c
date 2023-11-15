@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:45:07 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/13 22:22:38 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:11:00 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ int		ph_death(t_philo_data *ph);
 
 void	ph_eat(t_philo_data *ph)
 {
-	print_actions(ph->philo_id, "is eating!");
+	print_actions(ph->philo_id, "is eating");
 	if (ph->n_times_eat != philo()->n_times_eat)
 		ph->n_times_eat++;
 	ph->last_meal = get_time();
 	usleep(philo()->time_eat);
+	pthread_mutex_unlock(&philo()->forks[(ph->philo_id + 1) 
+		% philo()->n_philos]);
+	pthread_mutex_unlock(&philo()->forks[ph->philo_id]);
 }
 
 int	ph_death(t_philo_data *ph)
@@ -36,7 +39,8 @@ int	ph_death(t_philo_data *ph)
 	}
 	if (get_time() - ph->last_meal >= philo()->time_death)
 	{
-		print_actions(ph->philo_id, "has died!");
+		printf("%ld\t%i\t%s\n", ((get_time() - philo()->start_time) / 1000),
+			ph->philo_id, "died");
 		philo()->flag = 1;
 		pthread_mutex_unlock(&philo()->data_mutex);
 		return (1);
@@ -51,9 +55,9 @@ void	ph_think(t_philo_data *ph)
 
 	if (philo()->n_times_eat == 0 || ph->n_times_eat != philo()->n_times_eat)
 	{
-		print_actions(ph->philo_id, "is thinking!");
 		wait = philo()->time_death - (get_time() - ph->last_meal)
 			- (philo()->time_eat / 2);
+		print_actions(ph->philo_id, "is thinking");
 		if (wait > 0)
 			usleep(wait);
 	}
@@ -63,7 +67,7 @@ void	ph_sleep(t_philo_data *ph)
 {
 	if (philo()->n_times_eat == 0 || ph->n_times_eat != philo()->n_times_eat)
 	{
-		print_actions(ph->philo_id, "is sleeping!");
+		print_actions(ph->philo_id, "is sleeping");
 		usleep(philo()->time_sleep);
 	}
 }

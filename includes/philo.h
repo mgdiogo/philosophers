@@ -6,13 +6,15 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/13 23:53:30 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:45:33 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 # define INVALID_PH "The number of philosophers needs to be atleast 1"
+# define INVALID_ATOI "Arguments should always be positive.\n\
+Make sure not to use more than one '+' sign!\n"
 # include <pthread.h>
 # include <stdint.h>
 # include <stdio.h>
@@ -45,6 +47,7 @@ typedef struct s_philo
 
 void				clean_up(void);
 void				sync_func(void);
+void				death_loop(void);
 t_philo				*philo(void);
 long				get_time(void);
 long				ft_atoi(char *str);

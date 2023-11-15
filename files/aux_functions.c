@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 16:34:01 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/14 00:09:24 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:41:08 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ long	ft_atoi(char *str)
 	while (str[i])
 	{
 		if (!(str[i] <= '9' && str[i] >= '0') || str[i] == '-' || str[i] == '+')
-		{
-			printf("Arguments should always be positive.\n");
-			printf("Make sure not to use more than one '+' sign!\n");
-			exit (1);
-		}
+			return (-1);
 		else
 			res = (res * 10) + str[i] - 48;
 		i++;
@@ -59,6 +55,11 @@ long	get_time(void)
 void	print_actions(int id, char *str)
 {
 	pthread_mutex_lock(&philo()->print_mutex);
+	if (ph_death(&philo()->philos[id]))
+	{
+		pthread_mutex_unlock(&philo()->print_mutex);
+		return ;
+	}
 	printf("%ld\t%i\t%s\n", ((get_time() - philo()->start_time) / 1000),
 		id, str);
 	pthread_mutex_unlock(&philo()->print_mutex);
