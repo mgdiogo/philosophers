@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/15 17:45:33 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:30:30 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ typedef struct s_philo_data
 typedef struct s_philo
 {
 	int				flag;
+	int				flag2;
 	int				n_philos;
 	int				n_times_eat;
 	long			time_eat;
 	long			time_sleep;
 	long			time_death;
 	long			start_time;
+	pthread_mutex_t	last_meal;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	data_mutex;
+	pthread_mutex_t	t_eat_mutex;
 	pthread_mutex_t	*forks;
 	t_philo_data	*philos;
 }					t_philo;
 
 void				clean_up(void);
 void				sync_func(void);
-void				death_loop(void);
+void				death_checker(void);
 t_philo				*philo(void);
 long				get_time(void);
 long				ft_atoi(char *str);
@@ -59,7 +62,8 @@ int					ph_death(t_philo_data *ph);
 void				ph_sleep(t_philo_data *ph);
 void				ph_think(t_philo_data *ph);
 void				get_forks(t_philo_data *ph);
+int					check_death(t_philo_data *ph);
 void				eating_process(t_philo_data *ph);
-void				print_actions(int id, char *str);
+void				print_actions(t_philo_data *ph, int id, char *str);
 
 #endif

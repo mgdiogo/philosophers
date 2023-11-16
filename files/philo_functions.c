@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:38 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/14 16:10:02 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:08:13 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	allocate_philos(void)
 		pthread_mutex_init(&philo()->forks[i], 0);
 	pthread_mutex_init(&philo()->print_mutex, 0);
 	pthread_mutex_init(&philo()->data_mutex, 0);
+	pthread_mutex_init(&philo()->last_meal, 0);
+	pthread_mutex_init(&philo()->t_eat_mutex, 0);
 	create_philos();
 }
 
@@ -45,7 +47,8 @@ void	create_philos(void)
 	while (++i < philo()->n_philos)
 		pthread_create(&philo()->philos[i].ph_thread, 
 			NULL, &philo_routine, (void *)&philo()->philos[i]);
-	death_loop();
+	if (philo()->n_philos > 1)
+		death_checker();
 }
 
 void	*philo_routine(void *arg)
@@ -56,19 +59,14 @@ void	*philo_routine(void *arg)
 	sync_func();
 	if (philo()->n_philos == 1)
 	{
-		print_actions(ph->philo_id, "has taken a fork");
+		print_actions(ph, ph->philo_id, "has taken a fork");
 		usleep(philo()->time_death);
-		print_actions(ph->philo_id, "has died");
+		print_actions(ph, ph->philo_id, "has died");
 		return (NULL);
 	}
 	if (ph->philo_id % 2 == 0)
 		usleep(1000);
-	while (1)
-	{
-		if ((philo()->n_times_eat > 0 
-				&& ph->n_times_eat == philo()->n_times_eat) || ph_death(ph))
-			break ;
+	while (!check_death(ph))
 		eating_process(ph);
-	}
 	return (NULL);
 }

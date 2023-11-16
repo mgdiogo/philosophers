@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 16:34:01 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/15 17:41:08 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:07:47 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_philo	*philo(void);
 long	get_time(void);
 long	ft_atoi(char *str);
-void	print_actions(int id, char *str);
+void	print_actions(t_philo_data *ph, int id, char *str);
 
 t_philo	*philo(void)
 {
@@ -52,14 +52,11 @@ long	get_time(void)
 	return (time.tv_sec * 1000000L + time.tv_usec);
 }
 
-void	print_actions(int id, char *str)
+void	print_actions(t_philo_data *ph, int id, char *str)
 {
-	pthread_mutex_lock(&philo()->print_mutex);
-	if (ph_death(&philo()->philos[id]))
-	{
-		pthread_mutex_unlock(&philo()->print_mutex);
+	if (check_death(ph))
 		return ;
-	}
+	pthread_mutex_lock(&philo()->print_mutex);
 	printf("%ld\t%i\t%s\n", ((get_time() - philo()->start_time) / 1000),
 		id, str);
 	pthread_mutex_unlock(&philo()->print_mutex);
