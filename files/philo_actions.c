@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:45:07 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/16 17:42:01 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/17 17:43:02 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,14 @@ void	ph_think(t_philo_data *ph)
 
 void	ph_sleep(t_philo_data *ph)
 {
+	long	wait;
+
+	wait = philo()->time_death - (get_time() - ph->last_meal);
 	print_actions(ph, ph->philo_id, "is sleeping");
-	usleep(philo()->time_sleep);
+	if (wait < philo()->time_sleep)
+		usleep(wait);
+	else
+		usleep(philo()->time_sleep);
 }
 
 int	check_death(t_philo_data *ph)
