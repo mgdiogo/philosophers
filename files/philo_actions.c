@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:45:07 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/17 17:43:02 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/17 20:29:13 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	ph_eat(t_philo_data *ph)
 	print_actions(ph, ph->philo_id, "is eating");
 	pthread_mutex_lock(&philo()->t_eat_mutex);
 	if (ph->n_times_eat != philo()->n_times_eat)
-	{
 		ph->n_times_eat++;
-		pthread_mutex_unlock(&philo()->t_eat_mutex);
-	}
 	pthread_mutex_unlock(&philo()->t_eat_mutex);
 	pthread_mutex_lock(&philo()->last_meal);
 	ph->last_meal = get_time();
