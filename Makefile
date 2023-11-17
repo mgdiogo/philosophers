@@ -2,8 +2,7 @@ NAME	=	philo
 
 RM		=	rm -rf
 CC		=	cc
-FLAGS	=	-Wall -Werror -Wextra -pthread
-
+FLAGS	=	-Wall -Werror -Wextra -pthread -g
 SRC		=	philo.c files/aux_functions.c \
 			files/philo_functions.c files/philo_actions.c \
 			files/philo_aux.c
