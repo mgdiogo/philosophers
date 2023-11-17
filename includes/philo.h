@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/16 17:30:30 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/17 23:09:37 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_philo_data
 typedef struct s_philo
 {
 	int				flag;
-	int				flag2;
 	int				n_philos;
 	int				n_times_eat;
 	long			time_eat;
