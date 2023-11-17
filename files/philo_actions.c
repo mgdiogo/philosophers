@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:45:07 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/17 20:29:13 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/17 23:45:05 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ph_eat(t_philo_data *ph);
 void	ph_think(t_philo_data *ph);
 void	ph_sleep(t_philo_data *ph);
 int		ph_death(t_philo_data *ph);
+int		check_death(t_philo_data *ph);
 
 void	ph_eat(t_philo_data *ph)
 {
