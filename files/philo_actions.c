@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:45:07 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/17 23:45:05 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/18 18:43:11 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ph_eat(t_philo_data *ph)
 	pthread_mutex_lock(&philo()->last_meal);
 	ph->last_meal = get_time();
 	pthread_mutex_unlock(&philo()->last_meal);
-	usleep(philo()->time_eat);
+	u_sleep(philo()->time_eat);
 	pthread_mutex_unlock(&philo()->forks[ph->philo_id]);
 	pthread_mutex_unlock(&philo()->forks[(ph->philo_id + 1)
 		% philo()->n_philos]);
@@ -58,14 +58,14 @@ void	ph_think(t_philo_data *ph)
 		&& (philo()->n_philos % 2 == 0))
 	{
 		print_actions(ph, ph->philo_id, "is thinking");
-		usleep(500);
+		u_sleep(500);
 		return ;
 	}
 	wait = (philo()->time_death - (get_time() - ph->last_meal)
 			- philo()->time_eat) / 2;
 	print_actions(ph, ph->philo_id, "is thinking");
 	if (wait > 0)
-		usleep(wait);
+		u_sleep(wait);
 }
 
 void	ph_sleep(t_philo_data *ph)
@@ -75,9 +75,9 @@ void	ph_sleep(t_philo_data *ph)
 	wait = philo()->time_death - (get_time() - ph->last_meal);
 	print_actions(ph, ph->philo_id, "is sleeping");
 	if (wait < philo()->time_sleep)
-		usleep(wait);
+		u_sleep(wait);
 	else
-		usleep(philo()->time_sleep);
+		u_sleep(philo()->time_sleep);
 }
 
 int	check_death(t_philo_data *ph)

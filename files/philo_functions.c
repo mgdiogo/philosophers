@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:38 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/18 19:04:42 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:18:34 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	create_philos(void);
 void	allocate_philos(void);
 void	u_sleep(long time_sleep);
 void	*philo_routine(void *arg);
+void	print_actions(t_philo_data *ph, int id, char *str);
 
 void	allocate_philos(void)
 {
@@ -86,6 +87,16 @@ void	u_sleep(long time_sleep)
 			if (check_death(&philo()->philos[i]))
 				return ;
 		}
-		usleep(time_sleep / 1000);
+		usleep(time_sleep / 10000000);
 	}
+}
+
+void	print_actions(t_philo_data *ph, int id, char *str)
+{
+	if (check_death(ph))
+		return ;
+	pthread_mutex_lock(&philo()->print_mutex);
+	printf("%ld\t%i\t%s\n", ((get_time() - philo()->start_time) / 1000),
+		id, str);
+	pthread_mutex_unlock(&philo()->print_mutex);
 }
