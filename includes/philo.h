@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/17 23:09:37 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/18 18:42:36 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void				ph_think(t_philo_data *ph);
 void				get_forks(t_philo_data *ph);
 int					check_death(t_philo_data *ph);
 void				eating_process(t_philo_data *ph);
+void				u_sleep(long time_sleep);
 void				print_actions(t_philo_data *ph, int id, char *str);
 
 #endif

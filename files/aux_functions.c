@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 16:34:01 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/16 17:07:47 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:05:39 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	sync_func(void)
 
 	time = philo()->start_time - get_time();
 	if (time > 0)
-		usleep(time);
+		u_sleep(time);
 }
