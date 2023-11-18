@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 16:34:01 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/18 19:05:39 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:15:37 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 t_philo	*philo(void);
 long	get_time(void);
+void	sync_func(void);
 long	ft_atoi(char *str);
-void	print_actions(t_philo_data *ph, int id, char *str);
+int		check_int(long nbr);
 
 t_philo	*philo(void)
 {
 	static t_philo	philo;
 
 	return (&philo);
+}
+
+int	check_int(long nbr)
+{
+	if (nbr > MAX_INT)
+		return (1);
+	return (0);
 }
 
 long	ft_atoi(char *str)
@@ -41,6 +49,8 @@ long	ft_atoi(char *str)
 			res = (res * 10) + str[i] - 48;
 		i++;
 	}
+	if (check_int(res))
+		return (-1);
 	return (res);
 }
 
@@ -50,16 +60,6 @@ long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000000L + time.tv_usec);
-}
-
-void	print_actions(t_philo_data *ph, int id, char *str)
-{
-	if (check_death(ph))
-		return ;
-	pthread_mutex_lock(&philo()->print_mutex);
-	printf("%ld\t%i\t%s\n", ((get_time() - philo()->start_time) / 1000),
-		id, str);
-	pthread_mutex_unlock(&philo()->print_mutex);
 }
 
 void	sync_func(void)

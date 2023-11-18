@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:14 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/18 18:42:36 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:14:40 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define INVALID_PH "The number of philosophers needs to be atleast 1"
 # define INVALID_ATOI "Arguments should always be positive.\n\
 Make sure not to use more than one '+' sign!\n"
+# define MAX_INT 2147483647
 # include <pthread.h>
 # include <stdint.h>
 # include <stdio.h>
