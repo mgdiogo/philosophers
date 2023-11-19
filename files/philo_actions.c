@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:45:07 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/18 18:43:11 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:58:45 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int		check_death(t_philo_data *ph);
 void	ph_eat(t_philo_data *ph)
 {
 	print_actions(ph, ph->philo_id, "is eating");
-	pthread_mutex_lock(&philo()->t_eat_mutex);
-	if (ph->n_times_eat != philo()->n_times_eat)
-		ph->n_times_eat++;
-	pthread_mutex_unlock(&philo()->t_eat_mutex);
 	pthread_mutex_lock(&philo()->last_meal);
 	ph->last_meal = get_time();
 	pthread_mutex_unlock(&philo()->last_meal);
 	u_sleep(philo()->time_eat);
+	pthread_mutex_lock(&philo()->t_eat_mutex);
+	if (ph->n_times_eat != philo()->n_times_eat)
+		ph->n_times_eat++;
+	pthread_mutex_unlock(&philo()->t_eat_mutex);
 	pthread_mutex_unlock(&philo()->forks[ph->philo_id]);
 	pthread_mutex_unlock(&philo()->forks[(ph->philo_id + 1)
 		% philo()->n_philos]);
