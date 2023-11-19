@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:28:10 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/16 14:15:49 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:18:01 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int	main(int argc, char **argv)
 		philo()->start_time = get_time() + (philo()->n_philos * 2);
 		if (argc == 6)
 			philo()->n_times_eat = ft_atoi(argv[5]);
+		if (philo()->time_eat > philo()->time_death)
+			philo()->time_eat = philo()->time_death;
+		printf("time_eat: %ld\n", philo()->time_eat);
+		printf("time_death: %ld\n", philo()->time_death);
 		if (philo()->time_death < 0 || philo()->time_eat < 0 
-			|| philo()->time_sleep < 0)
+			|| philo()->time_sleep < 0 || philo()->n_times_eat < 0)
 			return (printf("%s", INVALID_ATOI));
 		allocate_philos();
 	}
