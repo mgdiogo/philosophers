@@ -6,7 +6,7 @@
 /*   By: mpedroso <mpedroso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:38 by mpedroso          #+#    #+#             */
-/*   Updated: 2023/11/18 19:18:34 by mpedroso         ###   ########.fr       */
+/*   Updated: 2023/11/19 21:01:35 by mpedroso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	u_sleep(long time_sleep)
 			if (check_death(&philo()->philos[i]))
 				return ;
 		}
-		usleep(time_sleep / 10000000);
+		usleep(time_sleep / 1000000);
 	}
 }
 
